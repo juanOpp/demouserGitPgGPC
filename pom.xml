@@ -134,11 +134,10 @@
 		</dependency>
 
 
-		<!-- Artifact Registry -->
 		<dependency>
 			<groupId>com.opplus</groupId>
-			<artifactId>utilidades</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>utilsOpp</artifactId>
+			<version>0.0.2</version>
 		</dependency>
 
 		<dependency>
