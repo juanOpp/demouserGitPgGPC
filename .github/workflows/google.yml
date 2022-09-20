@@ -45,6 +45,11 @@ jobs:
         run: |-         
          mvn sonar:sonar  -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}  -Dsonar.host.url=${{ env.SONAR_HOST_URL }}  -Dsonar.login=${{ env.SONAR_TOKEN }}
           
+          
+      #Mvn Clean Install
+      - name: Clean
+        run: |-         
+         mvn clean
   cd:
     needs: ci
      # Add 'id-token' with the intended permissions for workload identity federation
@@ -69,7 +74,12 @@ jobs:
        - name: Docker Auth
          run: |-       
            gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin europe-southwest1-docker.pkg.dev          
-          
+       - name: Path
+         run: |-
+           cd /home/runner/work/demouserGitPgGPC/demouserGitPgGPC
+           dir
+           # lstat /home/runner/work/demouserGitPgGPC/demouserGitPgGPC
+           
        - name: Build Container
          run: |-
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
