@@ -77,8 +77,8 @@ jobs:
        - name: Path
          run: |-
            cd /home/runner/work/demouserGitPgGPC/demouserGitPgGPC
-           dir
-           # lstat /home/runner/work/demouserGitPgGPC/demouserGitPgGPC
+           echo ls           
+          # lstat /home/runner/work/demouserGitPgGPC/demouserGitPgGPC
            
        - name: Build Container
          run: |-
