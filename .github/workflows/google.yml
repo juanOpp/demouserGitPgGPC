@@ -45,8 +45,7 @@ jobs:
         id: listrepo           
         continue-on-error: true
         run: |-
-          echo "::set-output name=num_rep::$(gcloud artifacts repositories describe nooo --location=${{ env.GAR_LOCATION }} )"
-          echo "::set-output name=num_rep2::$(gcloud artifacts repositories describe ${{ env.REPOSITORY }} --location=${{ env.GAR_LOCATION }} )"
+          echo "::set-output name=num_rep::$(gcloud artifacts repositories describe  ${{ env.REPOSITORY }} --location=${{ env.GAR_LOCATION }} )"         
           
       - if: ${{ steps.listrepo.outputs.num_rep == ''}}
         continue-on-error: true      
