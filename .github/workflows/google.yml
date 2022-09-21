@@ -44,7 +44,7 @@ jobs:
       - name: List repository
         id: listrepo           
         run: |-
-          echo "::set-output name=num_rep::$(gcloud artifacts repositories list --location=europe-southwest1 --filter="REPOSITORY~${{ env.REPOSITORY }})"
+          echo "::set-output name=num_rep::$(gcloud artifacts repositories list --location=europe-southwest1 --filter="REPOSITORY~${{ env.REPOSITORY }}")"
       - name: Check list
         run: echo ${{ steps.listrepo.outputs.num_rep }}  
         
