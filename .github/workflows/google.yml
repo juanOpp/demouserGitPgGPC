@@ -54,7 +54,7 @@ jobs:
           echo "::set-output name=num_rep_t::$(gcloud artifacts repositories list --location=europe-southwest1 --filter="REPOSITORY~${{ env.REPOSITORY }}")"
           
       - name: Check list 2
-        run: echo ${{ steps.listrepo.outputs.num_rep_t }}
+        run: echo ${{ steps.listrepo2.outputs.num_rep_t }}
           
       - name: Create Repository
         continue-on-error: true
