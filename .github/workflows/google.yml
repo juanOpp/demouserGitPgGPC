@@ -46,8 +46,16 @@ jobs:
         run: |-
           echo "::set-output name=num_rep::$(gcloud artifacts repositories list --location=europe-southwest1 --filter="REPOSITORY~noesta")"
       - name: Check list
-        run: echo ${{ steps.listrepo.outputs.num_rep }}  
-        
+        run: echo ${{ steps.listrepo.outputs.num_rep }}
+          
+      - name: List repository 2
+        id: listrepo2           
+        run: |-
+          echo "::set-output name=num_rep_t::$(gcloud artifacts repositories list --location=europe-southwest1 --filter="REPOSITORY~${{ env.REPOSITORY }}")"
+          
+      - name: Check list 2
+        run: echo ${{ steps.listrepo.outputs.num_rep_t }}
+          
       - name: Create Repository
         continue-on-error: true
         run: |-
