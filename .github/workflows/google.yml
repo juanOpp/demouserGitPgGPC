@@ -46,7 +46,8 @@ jobs:
         continue-on-error: true
         run: |-
           echo "::set-output name=num_rep::$(gcloud artifacts repositories describe noooo --location=${{ env.GAR_LOCATION }} )"
-      - name: Check list
+          
+      - if: ${{ steps.listrepo.outputs.num_rep != ''}}      
         run: echo ${{ steps.listrepo.outputs.num_rep }}
             
       - name: Create Repository
