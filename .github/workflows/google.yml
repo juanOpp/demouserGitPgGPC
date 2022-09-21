@@ -45,15 +45,21 @@ jobs:
         id: listrepo           
         continue-on-error: true
         run: |-
-          echo "::set-output name=num_rep::$(gcloud artifacts repositories describe ${{ env.REPOSITORY }} --location=${{ env.GAR_LOCATION }} )"
+          echo "::set-output name=num_rep::$(gcloud artifacts repositories describe nooo --location=${{ env.GAR_LOCATION }} )"
+          echo "::set-output name=num_rep2::$(gcloud artifacts repositories describe ${{ env.REPOSITORY }} --location=${{ env.GAR_LOCATION }} )"
           
-      - if: ${{ steps.listrepo.outputs.num_rep != ''}}      
-        run: echo ${{ steps.listrepo.outputs.num_rep }}
-            
-      - name: Create Repository
-        continue-on-error: true
+      - if: ${{ steps.listrepo.outputs.num_rep == ''}}
+        continue-on-error: true      
         run: |-
-         gcloud artifacts repositories create ${{ env.REPOSITORY }} --repository-format=docker --location=${{ env.REGION }} --description="Repositorio servicio usuario pg"
+         echo ${{ steps.listrepo.outputs.num_rep }}
+         gcloud artifacts repositories create ${{ env.REPOSITORY }} --repository-format=docker --location=${{ env.REGION }} --description="Repositorio ${{ env.REPOSITORY }}"
+        
+            
+      
+      #- name: Create Repository
+      #  continue-on-error: true
+      #  run: |-
+      #   gcloud artifacts repositories create ${{ env.REPOSITORY }} --repository-format=docker --location=${{ env.REGION }} --description="Repositorio servicio usuario pg"
 
       # Configurar la autenticación en los repositorios de Docker en la región      
       - name: Docker Auth
