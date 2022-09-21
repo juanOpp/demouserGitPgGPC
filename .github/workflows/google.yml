@@ -55,19 +55,12 @@ jobs:
           
       - name: Build Container
         run: |-
-         docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
-      
-      #SonarQube
-      - name: Tests
-        run: |-         
-         mvn sonar:sonar  -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}  -Dsonar.host.url=${{ env.SONAR_HOST_URL }}  -Dsonar.login=${{ env.SONAR_TOKEN }}
-           
+         docker build --build-arg SONAR_LOGIN=${{ env.SONAR_TOKEN }} --build-arg SONAR_HOST=${{ env.SONAR_HOST_URL }} --build-arg SONAR_PROJ=${{ env.SONAR_PROJECT_KEY }} -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
+ 
       - name: Push Container
         run: |-      
          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
       
-    
-          
   cd:
     needs: ci
      # Add 'id-token' with the intended permissions for workload identity federation
